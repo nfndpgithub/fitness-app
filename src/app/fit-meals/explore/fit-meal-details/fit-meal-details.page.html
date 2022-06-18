@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
+
+    <ion-buttons slot = "start">
+      <ion-back-button defaultHref = "/fit-meals/tabs/explore"></ion-back-button>
+    </ion-buttons>
+
     <ion-title>fit-meal-details</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+   <ion-card class="ion-padding">
+    <img [src]="fitmeal.imageUrl">
+    <ion-card-header>
+      <ion-card-title>{{fitmeal.title}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{fitmeal.text}}
+    </ion-card-content>
+
+   </ion-card>
+
 
 </ion-content>
