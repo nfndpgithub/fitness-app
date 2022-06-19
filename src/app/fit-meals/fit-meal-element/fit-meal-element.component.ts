@@ -8,7 +8,7 @@ import { FitMeal } from '../fit-meal.model';
 })
 export class FitMealElementComponent implements OnInit {
   @Input() fitmeal: FitMeal = {
-    id: 'r3',
+    id: 'r4',
     title: 'Novi',
     text: 'Novi',
     protein: 'new',
