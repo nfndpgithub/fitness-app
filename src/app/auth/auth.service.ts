@@ -24,4 +24,8 @@ export class AuthService {
     this._isUserAuthenticated=false;
 
   }
+
+  register() {
+    this._isUserAuthenticated=true;
+  }
 }
