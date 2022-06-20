@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FitMealModalComponent } from '../fit-meal-modal/fit-meal-modal.component';
-import {FitMeal} from '../fit-meal.model';
+import { FitMeal } from '../fit-meal.model';
 import { FitMealsService } from '../fit-meals.service';
 
 @Component({
@@ -10,29 +10,39 @@ import { FitMealsService } from '../fit-meals.service';
   styleUrls: ['./explore.page.scss'],
 })
 export class ExplorePage implements OnInit {
-
   fitmeals: FitMeal[];
 
-  constructor(private fitmealsService: FitMealsService, private modalCtrl: ModalController) {
-    this.fitmeals= this.fitmealsService.fitmeals;
-   }
-
-  ngOnInit() {
+  constructor(
+    private fitmealsService: FitMealsService,
+    private modalCtrl: ModalController
+  ) {
+    this.fitmeals = this.fitmealsService.fitmeals;
   }
+
+  ngOnInit() {}
 
   openModal() {
-    this.modalCtrl.create({
-      component: FitMealModalComponent,
-      componentProps: {title: 'Add fit meal'}
-    }).then((modal) => {
-      modal.present();
-      return modal.onDidDismiss();
-    }).then((resultData) =>{
-      if(resultData.role === 'confirm') {
-        console.log(resultData);
-        
-      }
-    });
+    this.modalCtrl
+      .create({
+        component: FitMealModalComponent,
+        componentProps: { title: 'Add fit meal' },
+      })
+      .then((modal) => {
+        modal.present();
+        return modal.onDidDismiss();
+      })
+      .then((resultData) => {
+        if (resultData.role === 'confirm') {
+          console.log(resultData);
+          let { title, text, protein } = resultData.data.fitmealData;
+          this.fitmealsService
+            .addMeal(title, text, protein)
+            .subscribe((res) => {
+              console.log(res);
+            });
+          console.log('uspesno');
+          console.log(resultData);
+        }
+      });
   }
-
 }
