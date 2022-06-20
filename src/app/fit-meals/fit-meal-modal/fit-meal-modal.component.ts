@@ -8,11 +8,10 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./fit-meal-modal.component.scss'],
 })
 export class FitMealModalComponent implements OnInit {
-
-  @ViewChild('f',{static:true}) form:NgForm;
+  @ViewChild('f', { static: true }) form: NgForm;
   @Input() title: string;
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {}
 
@@ -21,19 +20,19 @@ export class FitMealModalComponent implements OnInit {
   }
 
   onAddRecipe() {
-    if(!this.form.valid) {
+    if (!this.form.valid) {
       return;
     }
 
-    this.modalCtrl.dismiss({
-      fitmealData:
-       {
-        title: this.form.value['title'],
-       recipe: this.form.value['recipe']
-      }
-    },'confirm');
+    this.modalCtrl.dismiss(
+      {
+        fitmealData: {
+          title: this.form.value['title'],
+          text: this.form.value['recipe'],
+          protein: this.form.value['protein'],
+        },
+      },
+      'confirm'
+    );
   }
-
-
-
 }
