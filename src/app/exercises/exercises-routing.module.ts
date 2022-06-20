@@ -7,7 +7,15 @@ const routes: Routes = [
   {
     path: '',
     component: ExercisesPage
+  },  {
+    path: 'chest',
+    loadChildren: () => import('./chest/chest.module').then( m => m.ChestPageModule)
+  },
+  {
+    path: 'back',
+    loadChildren: () => import('./back/back.module').then( m => m.BackPageModule)
   }
+
 ];
 
 @NgModule({
