@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { FitMeal } from '../fit-meal.model';
 
 @Component({
@@ -16,7 +17,32 @@ export class FitMealElementComponent implements OnInit {
       'https://blogscdn.thehut.net/app/uploads/sites/478/2019/12/Spicy-Chicken-ARTICLE_1577793747.jpg',
   };
 
-  constructor() {}
+  constructor(private alertCtrl: AlertController) {}
 
   ngOnInit() {}
+
+  openAlert() {
+    this.alertCtrl.create({
+      header: 'FAVORITE FIT MEALS',
+      message: 'Move to favorites?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            console.log('moved');
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel');
+            
+          }
+        }
+      ]
+    }).then((alert) =>{
+      alert.present();
+    });
+  }
 }

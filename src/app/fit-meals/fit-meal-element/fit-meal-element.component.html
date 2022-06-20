@@ -1,6 +1,10 @@
 <ion-item>
-  <ion-avatar slot="start">
-    <ion-img [src]="fitmeal.imageUrl"></ion-img>
-  </ion-avatar>
-  <ion-label>{{fitmeal.title}}</ion-label>
+  <ion-item [routerLink]="['/','fit-meals','tabs','explore',fitmeal.id]">
+    <ion-avatar slot="start">
+      <ion-img [src]="fitmeal.imageUrl">
+      </ion-img>
+    </ion-avatar>
+    <ion-label>{{fitmeal.title}}</ion-label>
+  </ion-item>
+  <ion-icon name="heart-outline" color="primary" slot="end" (click)="openAlert()"></ion-icon>
 </ion-item>
