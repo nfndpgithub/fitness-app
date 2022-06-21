@@ -30,6 +30,7 @@ export class FitMealModalComponent implements OnInit {
           title: this.form.value['title'],
           text: this.form.value['recipe'],
           protein: this.form.value['protein'],
+          ingredients: this.form.value['ingredients'],
         },
       },
       'confirm'

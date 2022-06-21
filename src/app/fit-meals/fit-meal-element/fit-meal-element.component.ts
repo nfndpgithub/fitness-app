@@ -12,7 +12,7 @@ export class FitMealElementComponent implements OnInit {
     id: 'r4',
     title: 'Novi',
     text: 'Novi',
-    ingredients: ['new'],
+    ingredients: 'novi',
     protein: 'new',
     imageUrl:
       'https://blogscdn.thehut.net/app/uploads/sites/478/2019/12/Spicy-Chicken-ARTICLE_1577793747.jpg',
@@ -23,27 +23,28 @@ export class FitMealElementComponent implements OnInit {
   ngOnInit() {}
 
   openAlert() {
-    this.alertCtrl.create({
-      header: 'FAVORITE FIT MEALS',
-      message: 'Move to favorites?',
-      buttons: [
-        {
-          text: 'Yes',
-          handler: () => {
-            console.log('moved');
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel');
-            
-          }
-        }
-      ]
-    }).then((alert) =>{
-      alert.present();
-    });
+    this.alertCtrl
+      .create({
+        header: 'FAVORITE FIT MEALS',
+        message: 'Move to favorites?',
+        buttons: [
+          {
+            text: 'Yes',
+            handler: () => {
+              console.log('moved');
+            },
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel');
+            },
+          },
+        ],
+      })
+      .then((alert) => {
+        alert.present();
+      });
   }
 }

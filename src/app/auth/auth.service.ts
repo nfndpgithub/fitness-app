@@ -1,31 +1,27 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  //promenio da ne bi morao svaki put da se logujem kao debil
+  private _isUserAuthenticated = true;
 
-  private _isUserAuthenticated=false;
-  
-
-  constructor() { }
+  constructor() {}
 
   get isUserAuthenticated(): boolean {
-
     return this._isUserAuthenticated;
   }
 
   logIn() {
-    this._isUserAuthenticated=true;
-
+    this._isUserAuthenticated = true;
   }
 
   logOut() {
-    this._isUserAuthenticated=false;
-
+    this._isUserAuthenticated = false;
   }
 
   register() {
-    this._isUserAuthenticated=true;
+    this._isUserAuthenticated = true;
   }
 }

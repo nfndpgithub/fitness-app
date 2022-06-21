@@ -3,6 +3,15 @@ import { ModalController } from '@ionic/angular';
 import { FitMealModalComponent } from '../fit-meal-modal/fit-meal-modal.component';
 import { FitMeal } from '../fit-meal.model';
 import { FitMealsService } from '../fit-meals.service';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+interface MealsData {
+  id: string;
+  title: string;
+  text: string;
+  protein: string;
+  indgredients: string;
+}
 
 @Component({
   selector: 'app-explore',
@@ -16,10 +25,26 @@ export class ExplorePage implements OnInit {
     private fitmealsService: FitMealsService,
     private modalCtrl: ModalController
   ) {
-    this.fitmeals = this.fitmealsService.fitmeals;
+    //this.fitmeals = this.fitmealsService.fitmeals;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fitmealsService.getMeal().subscribe((data) => {
+      console.log(data);
+      const meals: FitMeal[] = [];
+      for (const key in data) {
+        meals.push({
+          id: key,
+          title: data[key].title,
+          text: data[key].text,
+          protein: data[key].protein,
+          ingredients: data[key].ingredients,
+          imageUrl: data[key].imageUrl,
+        });
+      }
+      this.fitmeals = meals;
+    });
+  }
 
   openModal() {
     this.modalCtrl
@@ -34,9 +59,10 @@ export class ExplorePage implements OnInit {
       .then((resultData) => {
         if (resultData.role === 'confirm') {
           console.log(resultData);
-          let { title, text,ingredients, protein } = resultData.data.fitmealData;
+          let { title, text, ingredients, protein } =
+            resultData.data.fitmealData;
           this.fitmealsService
-            .addMeal(title, text,ingredients, protein)
+            .addMeal(title, text, ingredients, protein)
             .subscribe((res) => {
               console.log(res);
             });
