@@ -21,4 +21,24 @@ export class ExercisesPage implements OnInit {
     this.router.navigateByUrl('/exercises/back');
  }
 
+ openArms() {
+  this.router.navigateByUrl('/exercises/arms');
+ }
+
+openShoulders() {
+  this.router.navigateByUrl('/exercises/shoulders');
+}
+
+openAbs()  {
+  this.router.navigateByUrl('/exercises/abs');
+}
+
+openLegs() {
+  this.router.navigateByUrl('/exercises/legs');  
+}
+
+openCalves() {
+  this.router.navigateByUrl('/exercises/calves');  
+}
+
 }

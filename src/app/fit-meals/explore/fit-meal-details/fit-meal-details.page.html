@@ -14,12 +14,19 @@
    <ion-card class="ion-padding">
     <img [src]="fitmeal.imageUrl">
     <ion-card-header>
-      <ion-card-title>{{fitmeal.title}}</ion-card-title>
+      <ion-card-title><b>{{fitmeal.title}}</b></ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       {{fitmeal.text}}
-      {{fitmeal.protein}}
+      <br/>
+      <br/>
+      <b>Ingredients:</b>
+      <ul>
+        <li>{{fitmeal.ingredients}}</li>
+      </ul>
+      <br/>
+     <b>Protein: {{fitmeal.protein}}</b>
     </ion-card-content>
 
    </ion-card>

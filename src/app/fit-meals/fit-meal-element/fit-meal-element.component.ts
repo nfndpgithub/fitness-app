@@ -12,6 +12,7 @@ export class FitMealElementComponent implements OnInit {
     id: 'r4',
     title: 'Novi',
     text: 'Novi',
+    ingredients: ['new'],
     protein: 'new',
     imageUrl:
       'https://blogscdn.thehut.net/app/uploads/sites/478/2019/12/Spicy-Chicken-ARTICLE_1577793747.jpg',

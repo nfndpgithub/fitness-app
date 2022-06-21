@@ -14,6 +14,26 @@ const routes: Routes = [
   {
     path: 'back',
     loadChildren: () => import('./back/back.module').then( m => m.BackPageModule)
+  },
+  {
+    path: 'arms',
+    loadChildren: () => import('./arms/arms.module').then( m => m.ArmsPageModule)
+  },
+  {
+    path: 'shoulders',
+    loadChildren: () => import('./shoulders/shoulders.module').then( m => m.ShouldersPageModule)
+  },
+  {
+    path: 'abs',
+    loadChildren: () => import('./abs/abs.module').then( m => m.AbsPageModule)
+  },
+  {
+    path: 'legs',
+    loadChildren: () => import('./legs/legs.module').then( m => m.LegsPageModule)
+  },
+  {
+    path: 'calves',
+    loadChildren: () => import('./calves/calves.module').then( m => m.CalvesPageModule)
   }
 
 ];

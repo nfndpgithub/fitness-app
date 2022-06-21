@@ -34,9 +34,9 @@ export class ExplorePage implements OnInit {
       .then((resultData) => {
         if (resultData.role === 'confirm') {
           console.log(resultData);
-          let { title, text, protein } = resultData.data.fitmealData;
+          let { title, text,ingredients, protein } = resultData.data.fitmealData;
           this.fitmealsService
-            .addMeal(title, text, protein)
+            .addMeal(title, text,ingredients, protein)
             .subscribe((res) => {
               console.log(res);
             });
