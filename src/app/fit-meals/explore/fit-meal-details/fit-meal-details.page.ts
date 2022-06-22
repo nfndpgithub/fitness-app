@@ -18,6 +18,6 @@ export class FitMealDetailsPage implements OnInit {
     this.route.paramMap.subscribe(paramMap => {
       this.fitmeal = this.fitmealsService.getFitMeal(paramMap.get('fitmealId'));
     });
-  }
+  } 
 
 }
