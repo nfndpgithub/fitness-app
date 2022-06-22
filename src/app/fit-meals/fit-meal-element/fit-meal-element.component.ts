@@ -47,4 +47,30 @@ export class FitMealElementComponent implements OnInit {
         alert.present();
       });
   }
+
+  openAlert2() {
+    this.alertCtrl
+      .create({
+        header: 'DELETE',
+        message: 'Are you sure you want to delete this?',
+        buttons: [
+          {
+            text: 'Yes',
+            handler: () => {
+              console.log('moved');
+            },
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel');
+            },
+          },
+        ],
+      })
+      .then((alert) => {
+        alert.present();
+      });
+  }
 }
