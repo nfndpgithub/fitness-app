@@ -27,6 +27,12 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./auth/register/register.module').then( m => m.RegisterPageModule)
   },
+ 
+  {
+    path: 'health-hacks',
+    loadChildren: () => import('./health-hacks/health-hacks.module').then( m => m.HealthHacksPageModule)
+  },
+
 
 ];
 
