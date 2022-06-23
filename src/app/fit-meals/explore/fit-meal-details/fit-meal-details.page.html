@@ -14,15 +14,18 @@
    <ion-card class="ion-padding">
     <img [src]="fitmeal.imageUrl">
     <ion-card-header>
-      <ion-card-title><b>{{fitmeal.title}}</b></ion-card-title>
+      <ion-card-title style="color:darkblue; text-align:center"><b>{{fitmeal.title}}</b></ion-card-title>
     </ion-card-header>
 
-    <ion-card-content>
+    <ion-card-content style="color: darkblue">
       {{fitmeal.text}}
       <br/>
       <br/>
-      <b>Ingredients:{{fitmeal.ingredients}}</b> 
-      <br/>
+      <ul>
+       <li>
+        <b>Ingredients:{{fitmeal.ingredients}}</b> 
+       </li>
+      </ul>
       <br/>
      <b>Protein: {{fitmeal.protein}}</b>
     </ion-card-content>
