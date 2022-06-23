@@ -10,7 +10,7 @@ import {map, switchMap, take, tap} from "rxjs/operators";
 })
 export class FitMealsService {
 
-  private oldFitmeals: FitMeal[] =[
+  private fitmeals: FitMeal[] =[
     {
       id: 'r1',
       title: 'api Chicken With Couscous',
@@ -96,6 +96,9 @@ export class FitMealsService {
     );
   } */
   getFitMeal(id: string) {
-    return this.oldFitmeals.find((fm) => fm.id === id);
+    this.fitMeal.subscribe((meals) => {
+      this.fitmeals = meals;});
+
+    return this.fitmeals.find((fm) => fm.id === id);
   }
 }

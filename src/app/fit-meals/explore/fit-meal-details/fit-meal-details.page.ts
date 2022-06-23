@@ -30,8 +30,9 @@ export class FitMealDetailsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((paramMap) => {/*
-      //this.fitmeal = this.fitmealsService.getFitMeal(paramMap.get('fitmealId'));
+    this.route.paramMap.subscribe((paramMap) => {
+      this.fitmeal = this.fitmealsService.getFitMeal(paramMap.get('fitmealId'));
+      /*
       // @ts-ignore
       this.fitmeal = this.fitmealsService.getMeal().pipe(map((fitmealsData=>{
         console.log(fitmealsData);
@@ -44,10 +45,11 @@ export class FitMealDetailsPage implements OnInit {
           }
         }
       })));*/
+      /*
       this.fitmealsService.fitMeal.subscribe((meals) => {
         this.fm = meals;
       });
-      this.fitmeal=this.fm.find((fm) => fm.id === paramMap.get('fitmealId'));
+      this.fitmeal=this.fm.find((fm) => fm.id === paramMap.get('fitmealId'));*/
       //console.log(this.fitmeal);
 
 
