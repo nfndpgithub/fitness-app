@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { FitMeal } from '../fit-meal.model';
+import {FitMealsService} from "../fit-meals.service";
 
 @Component({
   selector: 'app-fit-meal-element',
@@ -18,7 +19,7 @@ export class FitMealElementComponent implements OnInit {
       'https://blogscdn.thehut.net/app/uploads/sites/478/2019/12/Spicy-Chicken-ARTICLE_1577793747.jpg',
   };
 
-  constructor(private alertCtrl: AlertController) {}
+  constructor(private alertCtrl: AlertController,private fitmealsService: FitMealsService) {}
 
   ngOnInit() {}
 
@@ -57,7 +58,7 @@ export class FitMealElementComponent implements OnInit {
           {
             text: 'Yes',
             handler: () => {
-              console.log('moved');
+              this.fitmealsService.deleteFitMeal(this.fitmeal.id);
             },
           },
           {

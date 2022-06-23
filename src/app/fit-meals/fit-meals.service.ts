@@ -2,7 +2,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, pipe} from 'rxjs';
 import { FitMeal } from './fit-meal.model';
-import {map, switchMap, take, tap} from "rxjs/operators";
+import {map, switchMap, take, tap} from 'rxjs/operators';
+
+import { Database, set, ref, update, onValue,remove } from '@angular/fire/database';
+
 //import { MealsData } from './fitMeals.ts';
 
 @Injectable({
@@ -22,7 +25,7 @@ export class FitMealsService {
     }];
   private _fitmeals=new BehaviorSubject<FitMeal[]>([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private  db: Database) {}
   get fitMeal(){
     // eslint-disable-next-line no-underscore-dangle
     return this._fitmeals.asObservable();
@@ -101,4 +104,12 @@ export class FitMealsService {
 
     return this.fitmeals.find((fm) => fm.id === id);
   }
+  deleteFitMeal(id: string){
+   /* const  deleteEndpoint='https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/'+id;
+    return this.http.delete(deleteEndpoint);
+//https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/-N55kEk2Ar13nQSFj5Qb*/
+    // @ts-ignore
+    remove(ref(this.db, 'fitmeals/' + id), { });
+  }
+
 }
