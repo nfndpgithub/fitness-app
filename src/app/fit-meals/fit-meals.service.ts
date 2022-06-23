@@ -109,7 +109,9 @@ export class FitMealsService {
     return this.http.delete(deleteEndpoint);
 //https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/-N55kEk2Ar13nQSFj5Qb*/
     // @ts-ignore
-    remove(ref(this.db, 'fitmeals/' + id), { });
+
+    return remove(ref(this.db, 'fitmeals/' + id), { });
+
   }
 
 }

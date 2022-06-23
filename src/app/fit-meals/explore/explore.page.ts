@@ -5,6 +5,7 @@ import { FitMeal } from '../fit-meal.model';
 import { FitMealsService } from '../fit-meals.service';
 import {Observable, Subscription, throwError} from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import {reload} from "@angular/fire/auth";
 interface MealsData {
   id: string;
   title: string;
@@ -38,6 +39,7 @@ export class ExplorePage implements OnInit, OnDestroy{
     this.fitmealsService.getMeal().subscribe((meals) => {
      // this.fitmeals = meals;
     });
+
   }
 
 
