@@ -113,5 +113,22 @@ export class FitMealsService {
     return remove(ref(this.db, 'fitmeals/' + id), { });
 
   }
+  updateFitMeal(id: string,
+                title: string,
+                text: string,
+                ingredients: string,
+                protein: string,
+                imageUrl: string ='https://blogscdn.thehut.net/app/uploads/sites/478/2021/09/0806-STDCRE-19499-CC-MYP-Kitchen-Recipes-Shot-8-1200x672-min_1632817070.jpg'
+                ){
+    update(ref(this.db, 'fitmeals/' + id), {
+      title,
+      text,
+      ingredients,
+      protein,
+      imageUrl
+    });
+
+  }
+
 
 }

@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FitMealModalComponent } from '../fit-meal-modal/fit-meal-modal.component';
+import { FitMealModalUpdateComponent } from '../fit-meal-modal-update/fit-meal-modal-update.component';
 import { FitMeal } from '../fit-meal.model';
 import { FitMealsService } from '../fit-meals.service';
 import {Observable, Subscription, throwError} from 'rxjs';

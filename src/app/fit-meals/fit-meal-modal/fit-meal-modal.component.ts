@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import {FitMeal} from "../fit-meal.model";
 
 @Component({
   selector: 'app-fit-meal-modal',
@@ -10,10 +11,13 @@ import { ModalController } from '@ionic/angular';
 export class FitMealModalComponent implements OnInit {
   @ViewChild('f', { static: true }) form: NgForm;
   @Input() title: string;
+  @Input() fitMeal: FitMeal;
 
   constructor(private modalCtrl: ModalController) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.fitMeal);
+  }
 
   onCancel() {
     this.modalCtrl.dismiss();
