@@ -127,10 +127,59 @@ export class FitMealsService {
     });
 
   }
+  deleteUsingHttp1(id: string){
+    const url= 'https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/'+id+'.json';
+    // @ts-ignore
+    return this.http.delete<{ [key: string]: FitMeal }>(url).pipe(map((fitmealsData)=>{
+      const meals: FitMeal[] = [];
+      for (const key in fitmealsData) {
+        if(fitmealsData.hasOwnProperty(key)){
+          meals.push({
+            id: key,
+            title: fitmealsData[key].title,
+            text: fitmealsData[key].text,
+            protein: fitmealsData[key].protein,
+            ingredients: fitmealsData[key].ingredients,
+            imageUrl: fitmealsData[key].imageUrl,
+          });
+        }
+
+      }
+      this.fitMeal.subscribe((mealss) => {
+        this.fitmeals = mealss;});
+      // eslint-disable-next-line no-underscore-dangle
+      // @ts-ignore
+      //this.getMeal();
+
+      console.log(this._fitmeals);
+      console.log(this.fitmeals);
+      return this.fitmeals;
+
+    }),tap(meals=>{
+      //this._fitmeals.next(meals);
+    }));;
+
+  }
   deleteUsingHttp(id: string){
     const url= 'https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/'+id+'.json';
     // @ts-ignore
-    return this.http.delete<{ [key: string]: FitMeal }>(url);
+    return this.http.delete<{ [key: string]: FitMeal }>(url).pipe(map((fitmealsData)=>{
+
+      this.fitMeal.subscribe((mealss) => {
+        this.fitmeals = mealss;});
+      // eslint-disable-next-line no-underscore-dangle
+      // @ts-ignore
+      //this.getMeal();
+    this.fitmeals=this.getMeal().subscribe();
+      console.log(this._fitmeals);
+      console.log(this.fitmeals);
+      return this.fitmeals;
+
+    }),tap(meals=>{
+      console.log(this.fitmeals);
+    }));
+
+
   }
 
 
