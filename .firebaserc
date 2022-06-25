@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fitness-app-c9885": {
+      "hosting": {
+        "app": [
+          "fitness-app-c9885"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fitness-app-c9885"
+  }
+}
