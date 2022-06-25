@@ -3,9 +3,10 @@ import { AlertController } from '@ionic/angular';
 import { FitMeal } from '../fit-meal.model';
 import {FitMealsService} from '../fit-meals.service';
 import { switchMap} from 'rxjs/operators';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 import {reload} from "@angular/fire/auth";
 import { ModalController } from '@ionic/angular';
+import { FitMealModalUpdateComponent } from '../fit-meal-modal-update/fit-meal-modal-update.component';
 import { FitMealModalComponent } from '../fit-meal-modal/fit-meal-modal.component';
 
 @Component({
@@ -25,7 +26,7 @@ export class FitMealElementComponent implements OnInit, OnDestroy {
     imageUrl:
       'https://blogscdn.thehut.net/app/uploads/sites/478/2019/12/Spicy-Chicken-ARTICLE_1577793747.jpg',
   };*/
-
+  currentMeal: FitMeal;
   constructor(private alertCtrl: AlertController,
               private fitmealsService: FitMealsService,
               private router: Router,
@@ -68,7 +69,7 @@ export class FitMealElementComponent implements OnInit, OnDestroy {
     this.router.navigate(['./'],{relativeTo: this.route
     });
   }
-openModal(){
+/*openModal(){
   this.modalCtrl
     .create({
       component: FitMealModalComponent,
@@ -76,6 +77,8 @@ openModal(){
     })
     .then((modal) => {
       modal.present();
+      this.currentMeal=this.fitmealsService.getFitMeal(this.fitmeal.id);
+      console.log(this.currentMeal);
       return modal.onWillDismiss();
     })
     .then((resultData) => {
@@ -91,7 +94,44 @@ openModal(){
         console.log(resultData);
       }
     });
+}*/
+async openModal2() {
+  this.currentMeal=this.fitmealsService.getFitMeal(this.fitmeal.id);
+  console.log(this.currentMeal.id);
+  const modal = await this.modalCtrl.create({
+    component: FitMealModalUpdateComponent,
+    componentProps: {title: 'Edit fit meal',fitMeal:this.currentMeal},
+  });
+  await modal.present();
+  const {data: fitmealData }=await  modal.onWillDismiss();
+  console.log(fitmealData);
 }
+  openModal3() {
+    this.currentMeal=this.fitmealsService.getFitMeal(this.fitmeal.id);
+    console.log(this.currentMeal.id);
+    this.modalCtrl
+      .create({
+        component: FitMealModalUpdateComponent,
+        componentProps: { title: 'Edit fit meal',fitMeal:this.currentMeal },
+      })
+      .then((modal) => {
+        modal.present();
+        return modal.onDidDismiss();
+      })
+      .then((resultData) => {
+        if (resultData.role === 'confirm') {
+          console.log(resultData);
+          let { title, text, ingredients, protein,imageUrl } =resultData.data.fitmealData;
+          this.fitmealsService
+            .updateFitMeal(this.currentMeal.id,title,text,ingredients,protein, imageUrl);
+
+
+          console.log('uspesno');
+          console.log(resultData);
+        }
+      });
+  }
+
 
 
   openAlert2() {

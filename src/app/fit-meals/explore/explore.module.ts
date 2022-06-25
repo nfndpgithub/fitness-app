@@ -9,15 +9,16 @@ import { ExplorePageRoutingModule } from './explore-routing.module';
 import { ExplorePage } from './explore.page';
 import { FitMealElementComponent } from '../fit-meal-element/fit-meal-element.component';
 import {FitMealModalComponent} from '../fit-meal-modal/fit-meal-modal.component';
+import {FitMealModalUpdateComponent} from "../fit-meal-modal-update/fit-meal-modal-update.component";
 
-@NgModule({ 
+@NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ExplorePageRoutingModule
   ],
-  declarations: [ExplorePage,FitMealElementComponent,FitMealModalComponent],
+  declarations: [ExplorePage,FitMealElementComponent,FitMealModalComponent, FitMealModalUpdateComponent],
   entryComponents: [FitMealModalComponent]
 })
 export class ExplorePageModule {}

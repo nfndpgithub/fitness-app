@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, pipe} from 'rxjs';
+import {BehaviorSubject, observable, Observable, pipe} from 'rxjs';
 import { FitMeal } from './fit-meal.model';
 import {map, switchMap, take, tap} from 'rxjs/operators';
 
@@ -105,13 +105,28 @@ export class FitMealsService {
     return this.fitmeals.find((fm) => fm.id === id);
   }
   deleteFitMeal(id: string){
-   /* const  deleteEndpoint='https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/'+id;
-    return this.http.delete(deleteEndpoint);
-//https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/-N55kEk2Ar13nQSFj5Qb*/
-    // @ts-ignore
 
+
+    // @ts-ignore
     return remove(ref(this.db, 'fitmeals/' + id), { });
 
   }
+  updateFitMeal(id: string,
+                title: string,
+                text: string,
+                ingredients: string,
+                protein: string,
+                imageUrl: string ='https://blogscdn.thehut.net/app/uploads/sites/478/2021/09/0806-STDCRE-19499-CC-MYP-Kitchen-Recipes-Shot-8-1200x672-min_1632817070.jpg'
+                ){
+     update(ref(this.db, 'fitmeals/' + id), {
+      title,
+      text,
+      ingredients,
+      protein,
+      imageUrl
+    });
+
+  }
+
 
 }
