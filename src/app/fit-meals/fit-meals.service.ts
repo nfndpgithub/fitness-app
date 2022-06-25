@@ -5,6 +5,7 @@ import { FitMeal } from './fit-meal.model';
 import {catchError, map, switchMap, take, tap} from 'rxjs/operators';
 
 import { Database, set, ref, update, onValue,remove } from '@angular/fire/database';
+import {Health} from "../health-hacks/health.model";
 
 //import { MealsData } from './fitMeals.ts';
 
@@ -191,7 +192,6 @@ export class FitMealsService {
       string ='https://blogscdn.thehut.net/app/uploads/sites/478/2021/09/0806-STDCRE-19499-CC-MYP-Kitchen-Recipes-Shot-8-1200x672-min_1632817070.jpg'
   ) {
     const url= 'https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/'+id+'.json';
-
     return this.http.put<{ name: string }>(
       url,
       { title, text, ingredients, protein, imageUrl }
@@ -210,6 +210,15 @@ export class FitMealsService {
       //console.log(this.fitmeals);
     }));
   }
+  getHacks(){
+    return this.http.get<{ [key: string]: Health }>('https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/health-hacks.json');
+
+  }
+  addHack(name: string, image: string){
+    // @ts-ignore
+     return this.http.post('https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/health-hacks.json',{name,image}).subscribe();
+  }
+
 
 
 

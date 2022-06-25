@@ -125,6 +125,7 @@ async openModal2() {
           this.fitmealsService.updateUsingHttp(this.currentMeal.id,title,text,ingredients,protein, imageUrl).subscribe();
 
 
+
           console.log('uspesno');
           console.log(resultData);
         }
