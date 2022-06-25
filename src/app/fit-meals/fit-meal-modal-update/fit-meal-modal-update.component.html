@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="color:white">{{title}}</ion-title>
+    <ion-buttons slot="primary" style="color:white">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onEditRecipe()" novalidate>
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating" >Title</ion-label>
+            <ion-input type="text" ngModel="{{fitMeal.title}}" name="title" required=""></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Recipe</ion-label>
+            <ion-textarea type="text" rows="10"  name="recipe" ngModel="{{fitMeal.text}}" required ></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Ingredients</ion-label>
+            <ion-textarea type="text" rows="4"  name="ingredients" ngModel="{{fitMeal.ingredients}}" required></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating" >Protein</ion-label>
+            <ion-textarea type="text" rows="1"  name="protein" ngModel="{{fitMeal.protein}}"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-button type="submit" color="primary" expand="block" >
+            Edit recipe
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+  </form>
+</ion-content>
