@@ -143,7 +143,10 @@ async openModal2() {
           {
             text: 'Yes',
             handler: () => {
-               this.fitmealsService.deleteFitMeal(this.fitmeal.id);
+               //this.fitmealsService.deleteFitMeal(this.fitmeal.id);
+              this.fitmealsService.deleteUsingHttp(this.fitmeal.id).subscribe(((res)=>{
+
+              }));
 
 
 

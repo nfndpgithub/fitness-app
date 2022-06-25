@@ -2,7 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, observable, Observable, pipe} from 'rxjs';
 import { FitMeal } from './fit-meal.model';
-import {map, switchMap, take, tap} from 'rxjs/operators';
+import {catchError, map, switchMap, take, tap} from 'rxjs/operators';
 
 import { Database, set, ref, update, onValue,remove } from '@angular/fire/database';
 
@@ -127,6 +127,12 @@ export class FitMealsService {
     });
 
   }
+  deleteUsingHttp(id: string){
+    const url= 'https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/'+id+'.json';
+    // @ts-ignore
+    return this.http.delete<{ [key: string]: FitMeal }>(url);
+  }
+
 
 
 }

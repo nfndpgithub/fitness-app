@@ -63,8 +63,7 @@ export class ExplorePage implements OnInit, OnDestroy{
             .subscribe((res) => {
               //this.fitmeals=res;
             });
-          console.log('uspesno');
-          console.log(resultData);
+
         }
       });
   }
