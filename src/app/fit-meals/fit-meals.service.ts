@@ -165,21 +165,50 @@ export class FitMealsService {
     // @ts-ignore
     return this.http.delete<{ [key: string]: FitMeal }>(url).pipe(map((fitmealsData)=>{
 
-      this.fitMeal.subscribe((mealss) => {
-        this.fitmeals = mealss;});
+      //this.fitMeal.subscribe((mealss) => {
+        //this.fitmeals = mealss;});
       // eslint-disable-next-line no-underscore-dangle
       // @ts-ignore
       //this.getMeal();
     this.fitmeals=this.getMeal().subscribe();
-      console.log(this._fitmeals);
-      console.log(this.fitmeals);
-      return this.fitmeals;
+
+
+      //return this.fitmeals;
 
     }),tap(meals=>{
-      console.log(this.fitmeals);
+      //console.log(this.fitmeals);
     }));
 
 
+  }
+  updateUsingHttp(
+    id: string,
+    title: string,
+    text: string,
+    ingredients: string,
+    protein: string,
+    imageUrl:
+      string ='https://blogscdn.thehut.net/app/uploads/sites/478/2021/09/0806-STDCRE-19499-CC-MYP-Kitchen-Recipes-Shot-8-1200x672-min_1632817070.jpg'
+  ) {
+    const url= 'https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/'+id+'.json';
+
+    return this.http.put<{ name: string }>(
+      url,
+      { title, text, ingredients, protein, imageUrl }
+    ).pipe(map((fitmealsData)=>{
+
+
+      // eslint-disable-next-line no-underscore-dangle
+      // @ts-ignore
+
+      this.fitmeals=this.getMeal().subscribe();
+
+
+      //return this.fitmeals;
+
+    }),tap(meals=>{
+      //console.log(this.fitmeals);
+    }));
   }
 
 

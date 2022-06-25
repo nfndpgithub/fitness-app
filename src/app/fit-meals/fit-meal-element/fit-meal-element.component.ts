@@ -122,8 +122,7 @@ async openModal2() {
         if (resultData.role === 'confirm') {
           console.log(resultData);
           let { title, text, ingredients, protein,imageUrl } =resultData.data.fitmealData;
-          this.fitmealsService
-            .updateFitMeal(this.currentMeal.id,title,text,ingredients,protein, imageUrl);
+          this.fitmealsService.updateUsingHttp(this.currentMeal.id,title,text,ingredients,protein, imageUrl).subscribe();
 
 
           console.log('uspesno');
