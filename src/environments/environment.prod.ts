@@ -9,5 +9,6 @@ export const environment = {
     messagingSenderId: '682259176250',
     measurementId: 'G-XXEHRFHM81',
   },
-  production: true
+  production: true,
+  firebaseAPIkey: 'AIzaSyDOx_nIQa78T_QHV3ee9Gn49rV_DZZ6gOU'
 };

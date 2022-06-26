@@ -9,15 +9,24 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./log-in.page.scss'],
 })
 export class LogInPage implements OnInit {
+  isLoading = false;
 
   constructor(private authService: AuthService,private router: Router) { }
 
   ngOnInit() {
   }
 
-  onLogIn(form: NgForm) { 
-    this.authService.logIn();
-    this.router.navigateByUrl('/fit-meals/tabs/explore');
+  onLogIn(logInForm: NgForm) { 
+    this.isLoading=true;
+
+    if(logInForm.valid){
+    this.authService.logIn(logInForm.value).subscribe(resData => {
+      console.log('prijava uspesna');
+      console.log(resData);
+      this.isLoading=false;
+      this.router.navigateByUrl('/fit-meals/tabs/explore');
+    });
   }
+ }
 
 }

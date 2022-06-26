@@ -14,6 +14,7 @@ export const environment = {
     measurementId: 'G-XXEHRFHM81',
   },
   production: false,
+  firebaseAPIkey: 'AIzaSyDOx_nIQa78T_QHV3ee9Gn49rV_DZZ6gOU'
   /*
   firebaseConfig: {
     apiKey: "AIzaSyDOx_nIQa78T_QHV3ee9Gn49rV_DZZ6gOU",
