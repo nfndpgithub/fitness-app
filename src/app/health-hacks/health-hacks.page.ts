@@ -34,8 +34,9 @@ export class HealthHacksPage implements OnInit {
 
   }
 
-  goToItem(){
-    this.router.navigateByUrl('/health-hacks/');
+  goToItem(name: string){
+
+    this.router.navigateByUrl(this.router.createUrlTree(['/health-hacks', name.substring(0,name.indexOf(' '))]));
 
   }
 

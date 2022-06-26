@@ -9,27 +9,27 @@ const routes: Routes = [
     component: HealthHacksPage
   },
   {
-    path: 'vitamins',
+    path: 'Vitamins',
     loadChildren: () => import('./vitamins/vitamins.module').then( m => m.VitaminsPageModule)
   },
   {
-    path: 'healthy-eating',
+    path: 'Healthy',
     loadChildren: () => import('./healthy-eating/healthy-eating.module').then( m => m.HealthyEatingPageModule)
   },
   {
-    path: 'mental-health',
+    path: 'Mental',
     loadChildren: () => import('./mental-health/mental-health.module').then( m => m.MentalHealthPageModule)
   },
   {
-    path: 'sleep',
+    path: 'Sleep',
     loadChildren: () => import('./sleep/sleep.module').then( m => m.SleepPageModule)
   },
   {
-    path: 'tips-and-tricks',
+    path: 'Tips',
     loadChildren: () => import('./tips-and-tricks/tips-and-tricks.module').then( m => m.TipsAndTricksPageModule)
   },
   {
-    path: 'fitness',
+    path: 'Fitness',
     loadChildren: () => import('./fitness/fitness.module').then( m => m.FitnessPageModule)
   }
 ];
@@ -39,3 +39,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class HealthHacksPageRoutingModule {}
+
