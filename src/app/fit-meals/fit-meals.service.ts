@@ -6,8 +6,18 @@ import {catchError, map, switchMap, take, tap} from 'rxjs/operators';
 
 import { Database, set, ref, update, onValue,remove } from '@angular/fire/database';
 import {Health} from "../health-hacks/health.model";
+import { AuthService } from '../auth/auth.service';
 
 //import { MealsData } from './fitMeals.ts';
+
+interface FitMealData{
+  title: string;
+  text: string;
+  ingredients: string;
+  protein: string;
+  imageUrl: string;
+  userId: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -22,11 +32,13 @@ export class FitMealsService {
       ingredients: '1 tbsp. curry paste',
       protein: '50g',
       imageUrl:
-        'https://blogscdn.thehut.net/app/uploads/sites/478/2019/12/Spicy-Chicken-ARTICLE_1577793747.jpg'
+        'https://blogscdn.thehut.net/app/uploads/sites/478/2019/12/Spicy-Chicken-ARTICLE_1577793747.jpg',
+      userId: 'xx'
     }];
   private _fitmeals=new BehaviorSubject<FitMeal[]>([]);
 
-  constructor(private http: HttpClient, private  db: Database) {}
+  constructor(private http: HttpClient, private  db: Database,private authService: AuthService) {}
+
   get fitMeal(){
     // eslint-disable-next-line no-underscore-dangle
     return this._fitmeals.asObservable();
@@ -37,59 +49,72 @@ export class FitMealsService {
     text: string,
     ingredients: string,
     protein: string,
-    imageUrl:
-      string ='https://blogscdn.thehut.net/app/uploads/sites/478/2021/09/0806-STDCRE-19499-CC-MYP-Kitchen-Recipes-Shot-8-1200x672-min_1632817070.jpg'
-  ) {
+    imageUrl: string ='https://blogscdn.thehut.net/app/uploads/sites/478/2021/09/0806-STDCRE-19499-CC-MYP-Kitchen-Recipes-Shot-8-1200x672-min_1632817070.jpg') {
     let generatedId;
-    return this.http.post<{ name: string }>(
+    let newFitMeal: FitMeal;
+    let fetchedUserId: string;
 
-      'https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals.json',
-      { title, text, ingredients, protein, imageUrl }
-    ).pipe(switchMap((resData)=>{
-      // @ts-ignore
-      generatedId=resData.name;
-      return this.fitMeal;
+    return this.authService.userId.pipe(
+      take(1),
+      switchMap(userId =>{
+      fetchedUserId=userId;
+      return this.authService.token;
+     
+      }),
+      take(1),
+      switchMap((token) => {
+        newFitMeal= new FitMeal(
+          null,
+          title,
+          text,
+          ingredients,
+          protein,
+          'https://blogscdn.thehut.net/app/uploads/sites/478/2021/09/0806-STDCRE-19499-CC-MYP-Kitchen-Recipes-Shot-8-1200x672-min_1632817070.jpg',
+          fetchedUserId
+          );    
+          return this.http.post<{ name: string }>(
+            `https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals.json?auth=${token}`,newFitMeal);
 
-
-
-    }),take(1),tap((fitmeals)=>{
-      // eslint-disable-next-line no-underscore-dangle
-      this._fitmeals.next(fitmeals.concat({
-        id:generatedId,
-        title,
-        text,
-        ingredients,
-        protein,
-        imageUrl
-      }));
-    }));
+      }),
+      take(1),
+      switchMap((resData)=>{
+        generatedId=resData.name;
+        return this.fitMeal;
+      }),
+      take(1),
+      tap((fitmeals)=>{
+        newFitMeal.id = generatedId;
+        this._fitmeals.next(fitmeals.concat(newFitMeal));
+      })
+    );
   }
 
   getMeal() {
-    return this.http.get<{ [key: string]: FitMeal }>(
-      'https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals.json'
-    ).pipe(map((fitmealsData)=>{
-      const meals: FitMeal[] = [];
-      for (const key in fitmealsData) {
-        if(fitmealsData.hasOwnProperty(key)){
-          meals.push({
-            id: key,
-            title: fitmealsData[key].title,
-            text: fitmealsData[key].text,
-            protein: fitmealsData[key].protein,
-            ingredients: fitmealsData[key].ingredients,
-            imageUrl: fitmealsData[key].imageUrl,
-          });
+    return this.authService.token.pipe(
+      take(1),
+      switchMap((token) =>{
+        return this.http.get<{ [key: string]: FitMeal }>(
+          `https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals.json?auth=${token}`
+        )
+
+      }),
+      map((fitmealsData)=>{
+        const meals: FitMeal[] = [];
+        for (const key in fitmealsData) {
+          if(fitmealsData.hasOwnProperty(key)){
+            meals.push( new FitMeal(key,fitmealsData[key].title,fitmealsData[key].text, fitmealsData[key].protein, fitmealsData[key].ingredients,fitmealsData[key].imageUrl,fitmealsData[key].userId)   
+            );
+          }
+  
         }
-
-      }
-      // eslint-disable-next-line no-underscore-dangle
-      this._fitmeals.next(meals);
-      return meals;
-
-    }),tap(meals=>{
-      this._fitmeals.next(meals);
-    }));
+        // eslint-disable-next-line no-underscore-dangle
+        this._fitmeals.next(meals);
+        return meals;
+      }),
+      tap(meals=>{
+        this._fitmeals.next(meals);
+      })
+    );
   }
   //public cast=this._fitmeals.asObservable();
 
@@ -135,14 +160,8 @@ export class FitMealsService {
       const meals: FitMeal[] = [];
       for (const key in fitmealsData) {
         if(fitmealsData.hasOwnProperty(key)){
-          meals.push({
-            id: key,
-            title: fitmealsData[key].title,
-            text: fitmealsData[key].text,
-            protein: fitmealsData[key].protein,
-            ingredients: fitmealsData[key].ingredients,
-            imageUrl: fitmealsData[key].imageUrl,
-          });
+          meals.push( new FitMeal(key,fitmealsData[key].title,fitmealsData[key].text, fitmealsData[key].protein, fitmealsData[key].ingredients,fitmealsData[key].imageUrl,fitmealsData[key].userId)    
+          );
         }
 
       }
