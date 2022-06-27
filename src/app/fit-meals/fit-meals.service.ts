@@ -59,7 +59,7 @@ export class FitMealsService {
       switchMap(userId =>{
       fetchedUserId=userId;
       return this.authService.token;
-     
+
       }),
       take(1),
       switchMap((token) => {
@@ -71,7 +71,7 @@ export class FitMealsService {
           protein,
           'https://blogscdn.thehut.net/app/uploads/sites/478/2021/09/0806-STDCRE-19499-CC-MYP-Kitchen-Recipes-Shot-8-1200x672-min_1632817070.jpg',
           fetchedUserId
-          );    
+          );
           return this.http.post<{ name: string }>(
             `https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals.json?auth=${token}`,newFitMeal);
 
@@ -102,10 +102,10 @@ export class FitMealsService {
         const meals: FitMeal[] = [];
         for (const key in fitmealsData) {
           if(fitmealsData.hasOwnProperty(key)){
-            meals.push( new FitMeal(key,fitmealsData[key].title,fitmealsData[key].text, fitmealsData[key].protein, fitmealsData[key].ingredients,fitmealsData[key].imageUrl,fitmealsData[key].userId)   
+            meals.push( new FitMeal(key,fitmealsData[key].title,fitmealsData[key].text, fitmealsData[key].protein, fitmealsData[key].ingredients,fitmealsData[key].imageUrl,fitmealsData[key].userId)
             );
           }
-  
+
         }
         // eslint-disable-next-line no-underscore-dangle
         this._fitmeals.next(meals);
@@ -116,70 +116,16 @@ export class FitMealsService {
       })
     );
   }
-  //public cast=this._fitmeals.asObservable();
 
-
-  /*  getMeal(): Observable<MealsData[]> {
-    return this.http.get<MealsData[]>(
-      'https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals.json'
-    );
-  } */
   getFitMeal(id: string) {
     this.fitMeal.subscribe((meals) => {
       this.fitmeals = meals;});
 
     return this.fitmeals.find((fm) => fm.id === id);
   }
-  deleteFitMeal(id: string){
 
 
-    // @ts-ignore
-    return remove(ref(this.db, 'fitmeals/' + id), { });
 
-  }
-  updateFitMeal(id: string,
-                title: string,
-                text: string,
-                ingredients: string,
-                protein: string,
-                imageUrl: string ='https://blogscdn.thehut.net/app/uploads/sites/478/2021/09/0806-STDCRE-19499-CC-MYP-Kitchen-Recipes-Shot-8-1200x672-min_1632817070.jpg'
-                ){
-     update(ref(this.db, 'fitmeals/' + id), {
-      title,
-      text,
-      ingredients,
-      protein,
-      imageUrl
-    });
-
-  }
-  deleteUsingHttp1(id: string){
-    const url= 'https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/'+id+'.json';
-    // @ts-ignore
-    return this.http.delete<{ [key: string]: FitMeal }>(url).pipe(map((fitmealsData)=>{
-      const meals: FitMeal[] = [];
-      for (const key in fitmealsData) {
-        if(fitmealsData.hasOwnProperty(key)){
-          meals.push( new FitMeal(key,fitmealsData[key].title,fitmealsData[key].text, fitmealsData[key].protein, fitmealsData[key].ingredients,fitmealsData[key].imageUrl,fitmealsData[key].userId)    
-          );
-        }
-
-      }
-      this.fitMeal.subscribe((mealss) => {
-        this.fitmeals = mealss;});
-      // eslint-disable-next-line no-underscore-dangle
-      // @ts-ignore
-      //this.getMeal();
-
-      console.log(this._fitmeals);
-      console.log(this.fitmeals);
-      return this.fitmeals;
-
-    }),tap(meals=>{
-      //this._fitmeals.next(meals);
-    }));;
-
-  }
   deleteUsingHttp(id: string){
     const url= 'https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/'+id+'.json';
     // @ts-ignore
@@ -223,10 +169,10 @@ export class FitMealsService {
       this.fitmeals=this.getMeal().subscribe();
 
 
-      //return this.fitmeals;
+      ;
 
     }),tap(meals=>{
-      //console.log(this.fitmeals);
+
     }));
   }
   getHacks(){
@@ -238,7 +184,7 @@ export class FitMealsService {
         )
 
       }));
-    
+
 
   }
   addHack(name: string, image: string){
