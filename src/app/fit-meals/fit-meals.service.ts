@@ -230,7 +230,15 @@ export class FitMealsService {
     }));
   }
   getHacks(){
-    return this.http.get<{ [key: string]: Health }>('https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/health-hacks.json');
+    return this.authService.token.pipe(
+      take(1),
+      switchMap((token) =>{
+        return this.http.get<{ [key: string]: Health }>(
+          `https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/health-hacks.json?auth=${token}`
+        )
+
+      }));
+    
 
   }
   addHack(name: string, image: string){
