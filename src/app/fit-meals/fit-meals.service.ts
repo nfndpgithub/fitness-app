@@ -168,9 +168,6 @@ export class FitMealsService {
 
       this.fitmeals=this.getMeal().subscribe();
 
-
-      ;
-
     }),tap(meals=>{
 
     }));

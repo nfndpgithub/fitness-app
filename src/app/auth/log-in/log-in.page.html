@@ -42,6 +42,11 @@
         </div>
 
         <ion-button type="submit" expand="block" shape="round" [disabled]='logInForm.invalid' *ngIf="!isLoading">Log In</ion-button>
+        <br/>
+     
+        <label style="font-size:20px">Don't have an account? </label>
+          <a routerLink="/register" style="font-size:20px; font-style: underline;" > Register</a>
+  
         <img src="https://i.pinimg.com/originals/84/13/bc/8413bc86cd315360a8c35377f413f2a8.png" class="center">
       </ion-col>
     </ion-row>
