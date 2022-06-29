@@ -127,7 +127,10 @@ export class FitMealsService {
 
 
   deleteUsingHttp(id: string){
-    const url= 'https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/'+id+'.json';
+    return this.authService.token.pipe(
+      take(1),
+      switchMap((token) =>{
+    const url= `https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/`+id+`.json?auth=${token}`;
     // @ts-ignore
     return this.http.delete<{ [key: string]: FitMeal }>(url).pipe(map((fitmealsData)=>{
 
@@ -144,6 +147,8 @@ export class FitMealsService {
     }),tap(meals=>{
       //console.log(this.fitmeals);
     }));
+      }));
+
 
 
   }
@@ -156,7 +161,10 @@ export class FitMealsService {
     imageUrl:
       string ='https://blogscdn.thehut.net/app/uploads/sites/478/2021/09/0806-STDCRE-19499-CC-MYP-Kitchen-Recipes-Shot-8-1200x672-min_1632817070.jpg'
   ) {
-    const url= 'https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/'+id+'.json';
+    return this.authService.token.pipe(
+      take(1),
+      switchMap((token) =>{
+    const url= `https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/fitmeals/`+id+`.json?auth=${token}`;
     return this.http.put<{ name: string }>(
       url,
       { title, text, ingredients, protein, imageUrl }
@@ -174,6 +182,7 @@ export class FitMealsService {
     }),tap(meals=>{
 
     }));
+      }));
   }
   getHacks(){
     return this.authService.token.pipe(
