@@ -202,6 +202,12 @@ export class FitMealsService {
   // eslint-disable-next-line @typescript-eslint/member-ordering
   meals: FitMeal[]=[];
   favorite(meal: FitMeal){
+    for(const val of this.meals){
+      if(val.id===meal.id){
+        return;
+      }
+    }
+
     this.meals.push(meal);
 
     this.favMeals.next(this.meals);
