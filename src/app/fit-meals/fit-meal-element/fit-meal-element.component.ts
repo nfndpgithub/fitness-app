@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonIcon } from '@ionic/angular';
 import { FitMeal } from '../fit-meal.model';
 import {FitMealsService} from '../fit-meals.service';
 import { switchMap} from 'rxjs/operators';
@@ -17,6 +17,9 @@ import { FitMealModalComponent } from '../fit-meal-modal/fit-meal-modal.componen
 export class FitMealElementComponent implements OnInit, OnDestroy, OnChanges {
   @Input() fitmeal: FitMeal ;
   favFitmeals: FitMeal[]=[];
+  buttonIcon: string = "heart-outline";
+
+  
     /*{
     id: 'r4',
     title: 'Novi',
@@ -53,11 +56,14 @@ export class FitMealElementComponent implements OnInit, OnDestroy, OnChanges {
           {
             text: 'Yes',
             handler: () => {
+              
+              
               this.currentMeal=this.fitmealsService.getFitMeal(this.fitmeal.id);
               this.fitmealsService.favorite(this.currentMeal);
               //this.favFitmeals.push();
               console.log('moved');
               //console.log(this.favFitmeals);
+              this.buttonIcon = "heart"; 
             },
           },
           {
@@ -178,3 +184,7 @@ async openModal2() {
       });
   }
 }
+function querySelector(arg0: string) {
+  throw new Error('Function not implemented.');
+}
+
