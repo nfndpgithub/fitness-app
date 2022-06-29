@@ -17,10 +17,10 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.registerForm = new FormGroup({
-      name: new FormControl('Milica',Validators.required),
+      name: new FormControl('',Validators.required),
       surname: new FormControl(null,Validators.required),
       email: new FormControl(null,[Validators.required,Validators.email]),
-      password: new FormControl(null,[Validators.required,Validators.minLength(7)]) 
+      password: new FormControl(null,[Validators.required,Validators.minLength(7)])
     });
   }
 
@@ -38,5 +38,5 @@ export class RegisterPage implements OnInit {
   });
   }
 
-  
+
 }
