@@ -1,3 +1,6 @@
 .ion-padding{
     --ion-background-color:#fbc6c6;
 }
+ion-toolbar{
+    --background: var(--ion-color-secondary);
+}

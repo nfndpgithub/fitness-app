@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseAppModule } from '@angular/fire/app';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-log-in',
@@ -12,8 +14,7 @@ import { AuthService } from '../auth.service';
 export class LogInPage implements OnInit {
   isLoading = false;
 
-  constructor(private authService: AuthService,private router: Router, private alertCtrl: AlertController) { }
-
+  constructor(private authService: AuthService,private router: Router, private alertCtrl: AlertController) {}
   ngOnInit() {
   }
 
@@ -24,6 +25,10 @@ export class LogInPage implements OnInit {
     this.authService.logIn(logInForm.value).subscribe(resData => {
       this.isLoading=false;
       this.router.navigateByUrl('/fit-meals/tabs/explore');
+
+      
+
+
     },
      errRes => {
        this.isLoading= false;

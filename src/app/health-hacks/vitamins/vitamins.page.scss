@@ -19,3 +19,7 @@ ion-icon {
     background-color:gold;
     color: black;
 }
+
+ion-toolbar{
+    --background: var(--ion-color-secondary);
+}

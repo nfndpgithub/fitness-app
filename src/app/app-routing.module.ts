@@ -31,7 +31,11 @@ const routes: Routes = [
   {
     path: 'health-hacks',
     loadChildren: () => import('./health-hacks/health-hacks.module').then( m => m.HealthHacksPageModule)
+  },  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
+
 
 
 ];
