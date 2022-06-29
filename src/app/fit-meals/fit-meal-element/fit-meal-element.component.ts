@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { FitMeal } from '../fit-meal.model';
 import {FitMealsService} from '../fit-meals.service';
@@ -14,9 +14,9 @@ import { FitMealModalComponent } from '../fit-meal-modal/fit-meal-modal.componen
   templateUrl: './fit-meal-element.component.html',
   styleUrls: ['./fit-meal-element.component.scss'],
 })
-export class FitMealElementComponent implements OnInit, OnDestroy {
+export class FitMealElementComponent implements OnInit, OnDestroy, OnChanges {
   @Input() fitmeal: FitMeal ;
-
+  favFitmeals: FitMeal[]=[];
     /*{
     id: 'r4',
     title: 'Novi',
@@ -36,7 +36,13 @@ export class FitMealElementComponent implements OnInit, OnDestroy {
   ngOnInit() {}
   ionViewWillEnter() {
   }
-  ngOnDestroy(){}
+  ngOnDestroy(){
+
+  }
+  ngOnChanges() {
+
+  }
+
 
   openAlert() {
     this.alertCtrl
@@ -47,7 +53,11 @@ export class FitMealElementComponent implements OnInit, OnDestroy {
           {
             text: 'Yes',
             handler: () => {
+              this.currentMeal=this.fitmealsService.getFitMeal(this.fitmeal.id);
+              this.fitmealsService.favorite(this.currentMeal);
+              //this.favFitmeals.push();
               console.log('moved');
+              //console.log(this.favFitmeals);
             },
           },
           {

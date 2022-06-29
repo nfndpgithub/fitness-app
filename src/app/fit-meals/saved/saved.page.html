@@ -4,11 +4,15 @@
     <ion-buttons slot="start" style="color:white">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    
+
     <ion-title  style="color:white;">Favorite</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-list>
+    <app-fit-meal-element *ngFor="let fitmeal of favFitmeals" [fitmeal]="fitmeal"></app-fit-meal-element>
+  </ion-list>
 
 </ion-content>

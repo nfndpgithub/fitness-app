@@ -12,13 +12,16 @@ import {FitMealModalComponent} from '../fit-meal-modal/fit-meal-modal.component'
 import {FitMealModalUpdateComponent} from "../fit-meal-modal-update/fit-meal-modal-update.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ExplorePageRoutingModule
-  ],
-  declarations: [ExplorePage,FitMealElementComponent,FitMealModalComponent, FitMealModalUpdateComponent],
-  entryComponents: [FitMealModalComponent]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ExplorePageRoutingModule
+    ],
+    declarations: [ExplorePage, FitMealElementComponent, FitMealModalComponent, FitMealModalUpdateComponent],
+    exports: [
+        FitMealElementComponent
+    ],
+    entryComponents: [FitMealModalComponent]
 })
 export class ExplorePageModule {}

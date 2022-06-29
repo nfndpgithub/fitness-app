@@ -36,6 +36,8 @@ export class FitMealsService {
       userId: 'xx'
     }];
   private _fitmeals=new BehaviorSubject<FitMeal[]>([]);
+  private  favMeals=new BehaviorSubject<FitMeal[]>([]);
+  currentFavMeals=this.favMeals.asObservable();
 
   constructor(private http: HttpClient, private  db: Database,private authService: AuthService) {}
 
@@ -197,6 +199,14 @@ export class FitMealsService {
     // @ts-ignore
      return this.http.post('https://fitness-app-c9885-default-rtdb.europe-west1.firebasedatabase.app/health-hacks.json',{name,image}).subscribe();
   }
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  meals: FitMeal[]=[];
+  favorite(meal: FitMeal){
+    this.meals.push(meal);
+
+    this.favMeals.next(this.meals);
+  }
+
 
 
 
