@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../auth/auth.service';
+import {map, switchMap, take} from "rxjs/operators";
+import {User} from "../auth/user.model";
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
-  constructor() { }
+  private  user;
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+
+  this.user=this.authService.userEmail;
+
+
   }
 
 }

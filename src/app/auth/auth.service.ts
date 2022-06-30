@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from './user.model';
+import {user} from "@angular/fire/auth";
 
 
 interface AuthResponseData{
@@ -27,7 +28,7 @@ interface UserData{
   providedIn: 'root',
 })
 export class AuthService {
-  
+userEmail;
   private _isUserAuthenticated = false;
   private _user = new BehaviorSubject<User>(null);
 
@@ -37,6 +38,8 @@ export class AuthService {
     return this._user.asObservable().pipe(
      map((user) =>{
       if(user) {
+        this.userEmail=user.email;
+
         return !!user.token;
       } else {
         return false;
@@ -69,6 +72,12 @@ export class AuthService {
       })
      );
   }
+  get userInfo(){
+    return this.userEmail;
+
+
+  }
+
 
   register(user: UserData){
     this._isUserAuthenticated = true;
@@ -101,5 +110,5 @@ export class AuthService {
     this._user.next(null);
   }
 
-  
+
 }
