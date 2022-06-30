@@ -29,6 +29,7 @@ interface UserData{
 })
 export class AuthService {
 userEmail;
+userCreated;
   private _isUserAuthenticated = false;
   private _user = new BehaviorSubject<User>(null);
 
@@ -39,6 +40,7 @@ userEmail;
      map((user) =>{
       if(user) {
         this.userEmail=user.email;
+        this.userCreated=user.tokenExpirationDate;
 
         return !!user.token;
       } else {

@@ -9,12 +9,16 @@ import {User} from "../auth/user.model";
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  private  user;
+  private  userEmail: string;
+  private  userCreated: string;
+  private userName: string;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
 
-  this.user=this.authService.userEmail;
+  this.userEmail=this.authService.userEmail;
+  this.userCreated=this.authService.userCreated;
+  this.userName=this.userEmail.substring(0,this.userEmail.indexOf('@')).toUpperCase();
 
 
   }
