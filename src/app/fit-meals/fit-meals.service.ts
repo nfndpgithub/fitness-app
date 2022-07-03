@@ -71,7 +71,7 @@ export class FitMealsService {
           text,
           ingredients,
           protein,
-          'https://blogscdn.thehut.net/app/uploads/sites/478/2021/09/0806-STDCRE-19499-CC-MYP-Kitchen-Recipes-Shot-8-1200x672-min_1632817070.jpg',
+          'https://media.istockphoto.com/vectors/the-cook-vector-id165611246?b=1&k=20&m=165611246&s=612x612&w=0&h=9ICKsABUnhB0cQdRxYFQuGBMC1yKvuRU681OgCR2leg=',
           fetchedUserId
           );
           return this.http.post<{ name: string }>(

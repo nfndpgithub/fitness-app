@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'fitness-app',
+  appId: 'com.mmklab.fitness',
+  appName: 'FitLife',
   webDir: 'www',
   bundledWebRuntime: false
 };
