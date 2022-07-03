@@ -9,9 +9,9 @@ import {User} from "../auth/user.model";
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  private  userEmail: string;
-  private  userCreated: string;
-  private userName: string;
+  public  userEmail: string;
+  public  userCreated: string;
+  public userName: string;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {

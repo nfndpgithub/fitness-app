@@ -1,0 +1,6 @@
+{
+	"appId": "com.mmklab.fitness",
+	"appName": "FitLife",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
