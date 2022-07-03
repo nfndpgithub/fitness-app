@@ -104,7 +104,7 @@ export class FitMealsService {
         const meals: FitMeal[] = [];
         for (const key in fitmealsData) {
           if(fitmealsData.hasOwnProperty(key)){
-            meals.push( new FitMeal(key,fitmealsData[key].title,fitmealsData[key].text, fitmealsData[key].protein, fitmealsData[key].ingredients,fitmealsData[key].imageUrl,fitmealsData[key].userId)
+            meals.push( new FitMeal(key,fitmealsData[key].title,fitmealsData[key].text, fitmealsData[key].ingredients,fitmealsData[key].protein,fitmealsData[key].imageUrl,fitmealsData[key].userId)
             );
           }
 
