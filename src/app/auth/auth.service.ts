@@ -102,9 +102,13 @@ userCreated;
       tap((userData) => {
         const expirationTime = new Date(new Date().getTime() + +userData.expiresIn * 1000);
         const user = new User(userData.localId, userData.email, userData.idToken,expirationTime);
+        this.userEmail=user.email;
+        this.userCreated=expirationTime;
         this._user.next(user);
       })
       );
+
+
 
   }
 
